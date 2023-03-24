@@ -102,6 +102,7 @@ Relancer ensuite votre machine pour lancer l'interface graphique.
 ```
 [root@localhost ~]# snap install citra-emu
 ```
+
 ### Eléments de sécuritée (optionel)
 #### Fail2Ban
 
@@ -131,13 +132,25 @@ Modifier la conf de Fail2Ban
 
 #### Sécuriser l'accés a distance
 
-Désactiver Root
+Désactiver Root sur xrdp
 
 ```
 [root@localhost ~]# vim /etc/xrdp/sesman.ini
 
 [Security]
 AllowRootLogin=false
+```
+
+Désactiver Root en ssh
+
+```
+[root@localhost ~]# vim /etc/ssh/sshd_config
+
+PermitRootLogin No
+```
+
+```
+[root@localhost ~]# systemctl restart sshd
 ```
 
 Paramétrer les utilisateurs qui aurront accés au Shadow
@@ -155,3 +168,60 @@ TerminalServerUsers=<Nom_du_groupe>
 [...]
 AlwaysGroupCheck=true
 ```
+
+### Eléments d'améliorations
+#### Monitoring
+
+Instalation de NetData
+```
+[root@localhost ~]# dnf install epel-release -y
+```
+```
+[root@localhost ~]# wget -O /tmp/netdata-kickstart.sh https://my-netdata.io/kickstart.sh && sh /tmp/netdata-kickstart.sh
+```
+Lancement de NetData
+```
+[root@localhost ~]# systemctl start netdata
+
+[root@localhost ~]# systemctl enable netdata
+```
+Ouverture du firewall
+```
+[root@localhost ~]# firewall-cmd --permanent --add-port=19999/tcp
+
+[root@localhost ~]# firewall-cmd --reload
+```
+Pour se connecter: http://<IP_Machine>:19999
+
+#### Accés FTP
+
+Création d'un accés FTP réserver à l'administrateur pour ajouter des room de jeux.
+
+```
+[root@localhost ~]# dnf install vsftpd -y
+```
+```
+[root@localhost ~]# systemctl start vsftpd
+
+[root@localhost ~]# systemctl enable vsftpd
+```
+```
+[root@localhost ~]# firewall-cmd --add-service=ftp --permanent --zone=public
+
+[root@localhost ~]# firewall-cmd --reload
+
+```
+Crée ensuite un user dédier à l'utilisation du FTP (ou utiliser vôtre user qui vous sert déja d'admin).
+
+``` 
+[root@localhost ~]# adduser test
+
+[root@localhost ~]# passwd test
+```
+Allez ensuite dans le fichier `/etc/vsftpd/user_list` et enlever toute les user présent dans le fichier et mettez y le vôtre.
+
+Même manipulation dans le fichier `/etc/vsftpd/ftpusers`
+
+Pour terminer allez dans le fichier `/etc/vsftpd/vsftpd.conf` chercher la ligne `userlist_enable=YES` et passer le `YES` en `NO`
+
+Utiliser ensuite un client FTP (Fille Zila, WinScp etc...) pour vous connecter en protocole FTP à vôtre machine avec l'user adéquat.
