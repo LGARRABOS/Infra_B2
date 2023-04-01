@@ -49,6 +49,12 @@ dnf upgrade -y
 # Installer le paquet "snapd"
 dnf install -y snapd
 
+# Permet de réactiver le service snapd après le reboot
+systemctl enable snapd
+
+# Active le service snapd
+systemctl start snapd
+
 # Installer le paquet "citra-emu" via snap
 snap install citra-emu
 
