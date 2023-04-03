@@ -54,6 +54,7 @@ systemctl enable snapd
 
 # Active le service snapd
 systemctl start snapd
+systemctl start snapd
 
 # Installer le paquet "citra-emu" via snap
 snap install citra-emu
