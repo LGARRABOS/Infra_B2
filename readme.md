@@ -29,7 +29,7 @@ Commande d'utilisation:
 
 ### Eléments suplémentaire 
 
-Se premier script vous permet d'installer Fail2Ban netdata ainsi vsftpd.
+Ce premier script vous permet d'installer Fail2Ban netdata ainsi vsftpd.
 - Fail2Ban:
     Renforce la sécuritée des résaux de communication avec l'extérieur (vsftpd et ssh)
 
