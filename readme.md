@@ -62,9 +62,9 @@ Se premier script vous permet d'installer Fail2Ban netdata ainsi vsftpd.
         Utiliser ensuite un client FTP (Fille Zila, WinScp etc...) pour vous connecter en protocole FTP à vôtre machine avec l'user adéquat.  
 
 
-#### Sécuriser l'accés a distance
+### Securisation des accés
 
-Désactiver Root sur xrdp
+#### Désactiver Root sur xrdp
 
 ```
 [root@localhost ~]# vim /etc/xrdp/sesman.ini
@@ -73,7 +73,7 @@ Désactiver Root sur xrdp
 AllowRootLogin=false
 ```
 
-Désactiver Root en ssh
+#### Désactiver Root en ssh
 
 ```
 [root@localhost ~]# vim /etc/ssh/sshd_config
@@ -85,7 +85,7 @@ PermitRootLogin No
 [root@localhost ~]# systemctl restart sshd
 ```
 
-Paramétrer les utilisateurs qui aurront accés au Shadow
+#### Paramétrer les utilisateurs qui aurront accés au Shadow
 
 ```
 [root@localhost ~]# groupadd <Nom_du_groupe>
