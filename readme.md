@@ -32,6 +32,7 @@ Commande d'utilisation:
 Se premier script vous permet d'installer Fail2Ban netdata ainsi vsftpd.
 - Fail2Ban:
     Renforce la sécuritée des résaux de communication avec l'extérieur (vsftpd et ssh)
+
     Vous pouvez ajuster la configuration selon vos besoin en allant dans "/etc/fail2ban/jail.conf" pensez ensuite à redémarer le service avec "systemctl restart fail2ban.service"
 
 - netdata:
@@ -57,7 +58,7 @@ Se premier script vous permet d'installer Fail2Ban netdata ainsi vsftpd.
         Même manipulation dans le fichier `/etc/vsftpd/ftpusers`
 
         Pour terminer allez dans le fichier `/etc/vsftpd/vsftpd.conf` chercher la ligne `userlist_enable=YES` et passer le `YES` en `NO`
-        
+
         Utiliser ensuite un client FTP (Fille Zila, WinScp etc...) pour vous connecter en protocole FTP à vôtre machine avec l'user adéquat.  
 
 
