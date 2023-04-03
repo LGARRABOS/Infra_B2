@@ -39,17 +39,25 @@ Se premier script vous permet d'installer Fail2Ban netdata ainsi vsftpd.
 
 - vsftpd:
     Il s'agit d'un serveur FTP permetant d'accéder et de manipuler facilement des fichier/dossier sur vôtre machine.
+
     Il est utile si vous voulez mettre facilement à disposition des roms à vos utilisateurs.
+
     Pour améliorer la sécuritée de vos accés FTP vous pouvez effectuer la manip suivante:
+
         Crée ensuite un user dédier à l'utilisation du FTP (ou utiliser vôtre user qui vous sert déja d'admin).
+
         ``` 
         [root@localhost ~]# adduser test
 
         [root@localhost ~]# passwd test
         ```
+
         Allez ensuite dans le fichier `/etc/vsftpd/user_list` et enlever toute les user présent dans le fichier et mettez y le vôtre.
+
         Même manipulation dans le fichier `/etc/vsftpd/ftpusers`
+
         Pour terminer allez dans le fichier `/etc/vsftpd/vsftpd.conf` chercher la ligne `userlist_enable=YES` et passer le `YES` en `NO`
+        
         Utiliser ensuite un client FTP (Fille Zila, WinScp etc...) pour vous connecter en protocole FTP à vôtre machine avec l'user adéquat.  
 
 
