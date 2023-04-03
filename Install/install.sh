@@ -4,6 +4,10 @@
 read -p "Entrez le chemin et le nom du fichier de sortie: " log_file
 echo "Attention vôtre machine vas se relancer à la fin de se script"
 
+# Crée un dossier pour les roms de jeux
+
+mkdir /room
+
 # Rediriger la sortie standard (stdout) et la sortie d'erreur (stderr) vers le fichier de sortie
 exec > "$log_file" 2>&1
 
