@@ -21,114 +21,28 @@ Commande d'utilisation:
 - Machine Backup(optionel):
     - Connexion à Internet (ou réseau local du pc shadow citra)
 
-### Install GNOME Desktop
+## Instalation de vôtre environement
 
-```
-[root@localhost ~]# dnf group list --installed
-Last metadata expiration check: 0:24:15 ago on Fri Mar 10 09:25:02 2023.
-Installed Environment Groups:
-Minimal Install
-```
-```
-[root@localhost ~]# dnf group list --available
-Last metadata expiration check: 0:27:36 ago on Fri Mar 10 09:25:02 2023.
-Available Environment Groups:
-   Server
-   KDE Plasma Workspaces
-   Custom Operating System
-   Virtualization Host
-Available Groups:
-   Fedora Packager
-   Xfce
-   Legacy UNIX Compatibility
-   Console Internet Tools
-   Development Tools
-   .NET Development
-   Graphical Administration Tools
-   Network Servers
-   RPM Development Tools
-   Scientific Support
-   Security Tools
-   Smart Card Support
-   System Tools
-   ```
-```  
-[root@localhost ~]# dnf group install "Workstation"
-```
-```
-[root@localhost ~]# dnf group install "Server with GUI"
-```
-```
-[root@localhost ~]# systemctl set-default graphical
-```
-```
-[root@localhost ~]# systemctl get-default
-graphical.target
-```
-Relancer ensuite votre machine pour lancer l'interface graphique.
+- Télécharger les deux scipts trouvable dans Install.
+    Lancer le script "install.sh"
+    Une fois la machine relancer lancer le deuxiéme script
 
-### Install xrdp:
+### Eléments suplémentaire 
 
-```
-[root@localhost ~]# dnf install epel-release
-```
-```
-[root@localhost ~]# dnf install xrdp
-```
-```
-[root@localhost ~]# systemctl enable xrdp
-```
-```
-[root@localhost ~]# systemctl start xrdp
-```
-```
-[root@localhost ~]# firewall-cmd --permanent --add-port=3389/tcp
-```
-```
-[root@localhost ~]# firewall-cmd --reload
-```
+Se premier script vous permet d'installer Fail2Ban netdata ainsi vsftpd.
+- Fail2Ban:
+    Renforce la sécuritée des résaux de communication avec l'extérieur (vsftpd et ssh)
+    Vous pouvez ajuster la configuration selon vos besoin en allant dans "/etc/fail2ban/jail.conf" pensez ensuite à redémarer le service avec "systemctl restart fail2ban.service"
 
-### Citra-emu
+- netdata:
+    netdata est une solution de monitoring accesible en local sur vôtre navigateur web "http://<IP_Machine>:19999"
 
-```
-[root@localhost ~]# dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-```
-```
-[root@localhost ~]# dnf upgrade
-```
-```
-[root@localhost ~]# dnf install snapd
-```
-```
-[root@localhost ~]# snap install citra-emu
-```
+- vsftpd:
+    Il s'agit d'un serveur FTP permetant d'accéder et de manipuler facilement des fichier/dossier sur vôtre machine.
+    Il est utile si vous voulez mettre facilement à disposition des roms à vos utilisateurs.
+    Pour améliorer la sécuritée de vos accés FTP vous pouvez effectuer la manip suivante:
+        
 
-### Eléments de sécuritée (optionel)
-#### Fail2Ban
-
-Install de Fail2Ban
-
-```
-[root@localhost ~]# dnf install epel-release -y
-Complete!
-```
-```
-[root@localhost ~]# dnf install fail2ban -y
-Complete!
-```
-```
-[root@localhost ~]# systemctl start fail2ban.service
-[root@localhost ~]# sudo systemctl enable fail2ban.service
-```
-
-Modifier la conf de Fail2Ban
-
-```
-[root@localhost ~]# vim /etc/fail2ban/jail.conf
-```
-```
-[root@localhost ~]# systemctl restart fail2ban.service
-```
 
 #### Sécuriser l'accés a distance
 
@@ -170,45 +84,6 @@ AlwaysGroupCheck=true
 ```
 
 ### Eléments d'améliorations
-#### Monitoring
-
-Instalation de NetData
-```
-[root@localhost ~]# dnf install epel-release -y
-```
-```
-[root@localhost ~]# wget -O /tmp/netdata-kickstart.sh https://my-netdata.io/kickstart.sh && sh /tmp/netdata-kickstart.sh
-```
-Lancement de NetData
-```
-[root@localhost ~]# systemctl start netdata
-
-[root@localhost ~]# systemctl enable netdata
-```
-Ouverture du firewall
-```
-[root@localhost ~]# firewall-cmd --permanent --add-port=19999/tcp
-
-[root@localhost ~]# firewall-cmd --reload
-```
-Pour se connecter: http://<IP_Machine>:19999
-
-#### Accés FTP
-
-Création d'un accés FTP réserver à l'administrateur pour ajouter des room de jeux.
-
-```
-[root@localhost ~]# dnf install vsftpd -y
-```
-```
-[root@localhost ~]# systemctl start vsftpd
-
-[root@localhost ~]# systemctl enable vsftpd
-```
-```
-[root@localhost ~]# firewall-cmd --add-service=ftp --permanent --zone=public
-
-[root@localhost ~]# firewall-cmd --reload
 
 ```
 Crée ensuite un user dédier à l'utilisation du FTP (ou utiliser vôtre user qui vous sert déja d'admin).
