@@ -100,3 +100,27 @@ TerminalServerUsers=<Nom_du_groupe>
 [...]
 AlwaysGroupCheck=true
 ```
+
+#### Backup
+
+Prérequis:
+
+```
+sudo dnf install rsync -y
+
+sudo dnf install tar -y
+```
+
+Puis modifié le fichiers [backups.sh](./Backup/backup.sh).
+
+Mettre les fichier [backups.service](./Backup/backup.service) et [backups.timer](./Backup/backup.timer) dans /etc/systemd/system
+
+Pour lancer le service:
+
+```
+sudo systemctl daemon-reload
+
+sudo systemctl start backup.timer
+
+sudo systemctl enable backup.timer
+```

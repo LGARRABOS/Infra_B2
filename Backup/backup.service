@@ -2,8 +2,9 @@
 Description=create backup of all the users of the citra server
 
 [Service]
-ExecStart=/usr/bin/bash /Infra_B2/Backup/backup.sh
+ExecStart=/usr/bin/bash [backup_script_path]
 Type=oneshot
+User=[backup_user]
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target                       
