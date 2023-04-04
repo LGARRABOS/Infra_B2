@@ -111,6 +111,8 @@ sudo dnf install rsync -y
 sudo dnf install tar -y
 ```
 
+Créer une clé ssh depuis la machine backup sur la machine principal.
+
 Puis modifié le fichiers [backups.sh](./Backup/backup.sh).
 
 Mettre les fichier [backups.service](./Backup/backup.service) et [backups.timer](./Backup/backup.timer) dans /etc/systemd/system
