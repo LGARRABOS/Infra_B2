@@ -1,12 +1,14 @@
 #!/bin/bash
 
+dnf install -y epel-release
+
 # Installe et démarre fail2ban
 dnf install fail2ban -y
 systemctl start fail2ban.service
 sudo systemctl enable fail2ban.service
 
 # Installe et configure netdata
-wget -O /tmp/netdata-kickstart.sh https://my-netdata.io/kickstart.sh && sh /tmp/netdata-kickstart.sh
+wget -O /tmp/netdata-kickstart.sh https://my-netdata.io/kickstart.sh && sh /tmp/netdata-kickstart.sh -y
 systemctl start netdata
 systemctl enable netdata
 
