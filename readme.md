@@ -73,12 +73,19 @@ Ce premier script vous permet d'installer Fail2Ban netdata ainsi vsftpd.
 AllowRootLogin=false
 ```
 
-#### Désactiver Root en ssh
+#### Désactiver Root en ssh et choisir les utilisateurs qui pourront y accéder
 
+Désactiver root:
 ```
 [root@localhost ~]# vim /etc/ssh/sshd_config
 
 PermitRootLogin No
+```
+Chosire les users:
+```
+[root@localhost ~]# vim /etc/ssh/sshd_config
+
+AllowUsers      user1 user2 user3 etc
 ```
 
 ```
